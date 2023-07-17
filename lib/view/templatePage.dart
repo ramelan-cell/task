@@ -1,3 +1,6 @@
+import 'package:basecode/component/buttonWidget.dart';
+import 'package:basecode/component/radioButtonWidget.dart';
+import 'package:basecode/constan/constan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../component/dropdownWidget.dart';
@@ -27,10 +30,28 @@ class TemplatePage extends StatelessWidget {
               selectName: "Jenis Kelamin",
               listItem: templateC.listItemJenisKelamin,
               controller: templateC.jenisKelamin,
-            )
+            ),
+            DropdownWidget(
+              selectName: "Agama",
+              listItem: templateC.listItemAgama,
+              controller: templateC.agama,
+            ),
+            RadioButtonWidget(
+                title: 'Jenis Kelamin',
+                controller: templateC.jenisKelaminRadio,
+                listItem: templateC.listRadioJenisKelamin),
+            RadioButtonWidget(
+                title: 'Agama',
+                controller: templateC.agamaRadio,
+                listItem: templateC.listRadioAgama)
           ],
         ),
       )),
+      bottomNavigationBar: InkWell(
+        onTap: () => templateC.proses(),
+        child: ButtonWidget(
+            text: 'Proses', color: primaryColor, colorTxt: secondColor),
+      ),
     );
   }
 }

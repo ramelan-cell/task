@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../model/dropdownJenisKelamin.dart';
+import '../model/dropdown.dart';
 
 class DropdownWidget extends StatelessWidget {
   String selectName;
-  List<DropdownListJenisKelamin> listItem;
+  List<DropdownList> listItem;
   dynamic value = '';
   TextEditingController controller;
   DropdownWidget(
@@ -35,6 +35,7 @@ class DropdownWidget extends StatelessWidget {
                   border: Border.all(width: 1, color: Colors.grey),
                   borderRadius: BorderRadius.circular(15)),
               child: DropdownButtonFormField<dynamic>(
+                isDense: true,
                 decoration: InputDecoration(border: InputBorder.none),
                 hint: Text(
                   '- Pilih $selectName -',
@@ -46,13 +47,17 @@ class DropdownWidget extends StatelessWidget {
                     value == null ? 'Please insert $selectName' : null,
                 items: listItem.map((list) {
                   return DropdownMenuItem(
-                    child: Text(list.name),
+                    child: Text(
+                      list.name,
+                      style: TextStyle(fontSize: 14),
+                    ),
                     value: list.id,
                   );
                 }).toList(),
                 value: value,
                 onChanged: (e) {
-                  print(e);
+                  controller.text = e;
+                  print(controller.text);
                 },
               )),
         ],
