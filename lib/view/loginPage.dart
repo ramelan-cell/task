@@ -30,6 +30,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   prefixIcon: true,
                   suffixIcon: false,
+                  maxLine: 1,
                 ),
                 Obx(
                   () => TextFormFieldWidget(
@@ -45,6 +46,7 @@ class LoginPage extends StatelessWidget {
                             : Icons.visibility_off)),
                     prefixIcon: true,
                     suffixIcon: false,
+                    maxLine: 1,
                   ),
                 ),
                 InkWell(

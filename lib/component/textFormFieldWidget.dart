@@ -10,6 +10,7 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget iconWidget;
   bool prefixIcon;
   bool suffixIcon;
+  int maxLine = 1;
   TextInputType inputType;
 
   TextFormFieldWidget(
@@ -21,7 +22,8 @@ class TextFormFieldWidget extends StatelessWidget {
       required this.iconWidget,
       required this.prefixIcon,
       required this.suffixIcon,
-      required this.inputType});
+      required this.inputType,
+      required this.maxLine});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class TextFormFieldWidget extends StatelessWidget {
                 style: TextStyle(fontSize: 14, color: Colors.black87),
               )),
           TextFormField(
+            maxLines: maxLine,
             keyboardType: inputType,
             readOnly: readOnly,
             controller: controller,
