@@ -1,3 +1,4 @@
+import 'package:basecode/constan/constan.dart';
 import 'package:flutter/material.dart';
 
 class FooterLoginPage extends StatelessWidget {
@@ -16,8 +17,8 @@ class FooterLoginPage extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(left: 10),
-            child: const Text(
-              'PT Tangkas Cipta Optimal',
+            child: Text(
+              titleAplikasi,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -27,11 +28,7 @@ class FooterLoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Citra Towers, North Tower, 23rd & 25th Floor'),
-                Text('Jl. Benyamin Sueb Kav. A6,Kemayoran'),
-                Text('Jakarta Pusat, 10630')
-              ],
+              children: [Text(alamatSatu), Text(alamatDua), Text(alamatTiga)],
             ),
           ),
         ],

@@ -19,6 +19,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 TextFormFieldWidget(
+                  inputType: TextInputType.text,
                   text: 'Username',
                   controller: authC.username,
                   obscureText: false,
@@ -32,6 +33,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 Obx(
                   () => TextFormFieldWidget(
+                    inputType: TextInputType.none,
                     text: 'Password',
                     controller: authC.password,
                     obscureText: authC.secureText.value,

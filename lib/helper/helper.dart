@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class HelperController {
   static void messageBoxError(String text) {
@@ -24,5 +25,17 @@ class HelperController {
         snackPosition: SnackPosition.TOP,
         duration: Duration(seconds: 3),
         colorText: Colors.white);
+  }
+
+  static String formatRupiah(
+      {required double nominal,
+      required int decimalDigit,
+      required String symbol}) {
+    NumberFormat currencyFormatter = NumberFormat.currency(
+      locale: 'id',
+      symbol: symbol + ' ',
+      decimalDigits: decimalDigit,
+    );
+    return currencyFormatter.format(nominal);
   }
 }

@@ -1,11 +1,12 @@
-import 'package:basecode/component/buttonWidget.dart';
-import 'package:basecode/component/radioButtonWidget.dart';
-import 'package:basecode/constan/constan.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../component/buttonWidget.dart';
 import '../component/dropdownWidget.dart';
+import '../component/radioButtonWidget.dart';
 import '../component/textFormFieldWidget.dart';
+import '../constan/constan.dart';
 import '../controller/templateController.dart';
+import '../helper/helper.dart';
 
 class TemplatePage extends StatelessWidget {
   TemplatePage({super.key});
@@ -19,6 +20,7 @@ class TemplatePage extends StatelessWidget {
         child: Column(
           children: [
             TextFormFieldWidget(
+                inputType: TextInputType.text,
                 text: 'username',
                 controller: TextEditingController(),
                 obscureText: false,
@@ -43,7 +45,15 @@ class TemplatePage extends StatelessWidget {
             RadioButtonWidget(
                 title: 'Agama',
                 controller: templateC.agamaRadio,
-                listItem: templateC.listRadioAgama)
+                listItem: templateC.listRadioAgama),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Format Rupiah'),
+                Text(HelperController.formatRupiah(
+                    nominal: 60000000, symbol: 'Rp', decimalDigit: 2)),
+              ],
+            )
           ],
         ),
       )),

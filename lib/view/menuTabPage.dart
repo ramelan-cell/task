@@ -16,7 +16,7 @@ class MenuTabPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBarWidget(
-            title: 'PT. Tangkas Cipta Optimal',
+            title: titleAplikasi,
             flagBack: false,
             flagAction: true,
             child: IconButton(

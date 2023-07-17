@@ -10,6 +10,7 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget iconWidget;
   bool prefixIcon;
   bool suffixIcon;
+  TextInputType inputType;
 
   TextFormFieldWidget(
       {super.key,
@@ -19,7 +20,8 @@ class TextFormFieldWidget extends StatelessWidget {
       required this.readOnly,
       required this.iconWidget,
       required this.prefixIcon,
-      required this.suffixIcon});
+      required this.suffixIcon,
+      required this.inputType});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class TextFormFieldWidget extends StatelessWidget {
                 style: TextStyle(fontSize: 14, color: Colors.black87),
               )),
           TextFormField(
+            keyboardType: inputType,
             readOnly: readOnly,
             controller: controller,
             obscureText: obscureText,

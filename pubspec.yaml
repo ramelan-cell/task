@@ -43,6 +43,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_web_frame: ^0.0.3
   new_version_plus: ^0.0.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
