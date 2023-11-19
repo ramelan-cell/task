@@ -18,6 +18,21 @@ class LoginPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Center(
+                  child: Text('Welcome to'),
+                ),
+                Center(
+                  child: Text(
+                    'Task Management',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Text('please login to access the app'),
+                ),
                 TextFormFieldWidget(
                   inputType: TextInputType.text,
                   text: 'Username',
@@ -56,7 +71,7 @@ class LoginPage extends StatelessWidget {
                       color: primaryColor,
                       colorTxt: secondColor),
                 ),
-                FooterLoginPage()
+                // FooterLoginPage()
               ],
             ),
           ),

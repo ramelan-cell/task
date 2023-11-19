@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-String titleAplikasi = "PT BASECODE INDONESIA";
-String alamatSatu = 'Citra Towers, North Tower, 23rd & 25th Floor';
-String alamatDua = 'Jl. Benyamin Sueb Kav. A6,Kemayoran';
-String alamatTiga = 'Jakarta Pusat, 10630';
+String titleAplikasi = "Task Management system";
+String alamatSatu = '';
+String alamatDua = '';
+String alamatTiga = '';
 
 String SPLASH_SCREEN = '/launcher';
 String HOME_SCREEN = '/main';

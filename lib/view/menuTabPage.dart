@@ -13,23 +13,33 @@ class MenuTabPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBarWidget(
             title: titleAplikasi,
             flagBack: false,
             flagAction: true,
-            child: IconButton(
-                onPressed: () => authC.signOut(),
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.black,
-                ))),
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () => authC.getListTask(authC.userId.value),
+                    icon: Icon(
+                      Icons.refresh,
+                      color: Colors.black,
+                    )),
+                IconButton(
+                    onPressed: () => authC.signOut(),
+                    icon: Icon(
+                      Icons.logout,
+                      color: Colors.black,
+                    )),
+              ],
+            )),
         body: DefaultTextStyle(
           style: TextStyle(color: primaryColor, fontSize: 13),
           child: TabBarView(
             physics: NeverScrollableScrollPhysics(),
-            children: <Widget>[HomePage(), TemplatePage(), AboutPage()],
+            children: <Widget>[HomePage(), AboutPage()],
           ),
         ),
         bottomNavigationBar: Container(
@@ -43,13 +53,6 @@ class MenuTabPage extends StatelessWidget {
                 icon: Icon(Icons.home),
                 child: Text(
                   "Home",
-                  style: TextStyle(fontSize: 12.0),
-                ),
-              ),
-              Tab(
-                icon: Icon(Icons.menu),
-                child: Text(
-                  "Template",
                   style: TextStyle(fontSize: 12.0),
                 ),
               ),

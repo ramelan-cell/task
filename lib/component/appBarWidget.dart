@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constan/constan.dart';
 
-class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   String title;
   bool flagBack;
   bool flagAction;
@@ -24,7 +24,8 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: primaryColor,
       title: Text(
         title,
-        style: TextStyle(color: Colors.black87, fontSize: 16),
+        style: TextStyle(
+            color: Colors.black87, fontSize: 16, fontWeight: FontWeight.bold),
       ),
       centerTitle: true,
       actions: [(flagAction == true) ? child : SizedBox()],

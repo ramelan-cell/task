@@ -9,6 +9,7 @@ class BaseController extends GetxController {
       int localVersion = int.parse(status.localVersion.replaceAll('.', ''));
       int storeVersion = int.parse(status.storeVersion.replaceAll('.', ''));
       if (localVersion < storeVersion) {
+        // ignore: use_build_context_synchronously
         newVersion.showUpdateDialog(
           allowDismissal: false,
           context: context,
