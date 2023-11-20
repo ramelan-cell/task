@@ -25,13 +25,13 @@ class MenuTabPage extends StatelessWidget {
                     onPressed: () => authC.getListTask(authC.userId.value),
                     icon: Icon(
                       Icons.refresh,
-                      color: Colors.black,
+                      color: whiteColor,
                     )),
                 IconButton(
                     onPressed: () => authC.signOut(),
                     icon: Icon(
                       Icons.logout,
-                      color: Colors.black,
+                      color: whiteColor,
                     )),
               ],
             )),

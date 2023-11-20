@@ -1,4 +1,5 @@
 import 'package:basecode/component/footerWidget.dart';
+import 'package:basecode/helper/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../component/buttonWidget.dart';
@@ -19,19 +20,26 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 Center(
-                  child: Text('Welcome to'),
+                  child: Text(
+                    'Welcome to',
+                    style: HelperController.textStyle(
+                        13, secondColor, FontWeight.normal),
+                  ),
                 ),
                 Center(
                   child: Text(
                     'Task Management',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: HelperController.textStyle(
+                        25, primaryColor, FontWeight.bold),
                   ),
                 ),
                 Center(
-                  child: Text('please login to access the app'),
+                  child: Text('please login to access the app',
+                      style: HelperController.textStyle(
+                          13, secondColor, FontWeight.normal)),
+                ),
+                SizedBox(
+                  height: 30,
                 ),
                 TextFormFieldWidget(
                   inputType: TextInputType.text,
@@ -47,9 +55,10 @@ class LoginPage extends StatelessWidget {
                   suffixIcon: false,
                   maxLine: 1,
                 ),
+
                 Obx(
                   () => TextFormFieldWidget(
-                    inputType: TextInputType.none,
+                    inputType: TextInputType.text,
                     text: 'Password',
                     controller: authC.password,
                     obscureText: authC.secureText.value,
@@ -64,12 +73,13 @@ class LoginPage extends StatelessWidget {
                     maxLine: 1,
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 InkWell(
                   onTap: () => authC.login(),
                   child: ButtonWidget(
-                      text: 'Login',
-                      color: primaryColor,
-                      colorTxt: secondColor),
+                      text: 'Login', color: primaryColor, colorTxt: whiteColor),
                 ),
                 // FooterLoginPage()
               ],

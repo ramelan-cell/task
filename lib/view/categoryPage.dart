@@ -1,29 +1,48 @@
+import 'package:basecode/component/appBarWidget.dart';
+import 'package:basecode/component/buttonWidget.dart';
 import 'package:basecode/constan/constan.dart';
 import 'package:basecode/controller/authController.dart';
 import 'package:basecode/helper/helper.dart';
-import 'package:basecode/view/taskCategory.dart';
+import 'package:basecode/view/checkListpage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ListTaskPage extends StatelessWidget {
-  const ListTaskPage({super.key});
+class CategoryPage extends StatelessWidget {
+  Map<String, dynamic> listData;
+  CategoryPage(this.listData, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AuthController>(
-      builder: (autC) {
-        return Container(
-          child: ListView.builder(
-              itemCount: autC.dataListTask.length,
+    return Scaffold(
+      appBar: AppBarWidget(
+          title: 'Category',
+          flagBack: true,
+          flagAction: true,
+          child: GetBuilder<AuthController>(
+            builder: (authC) {
+              return IconButton(
+                  onPressed: () => authC.getCategory(listData['id']),
+                  icon: Icon(
+                    Icons.refresh,
+                    color: secondColor,
+                  ));
+            },
+          )),
+      body: Container(
+        child: GetBuilder<AuthController>(builder: (authC) {
+          return ListView.builder(
               shrinkWrap: true,
+              itemCount: authC.dataCategory.length,
               itemBuilder: (context, i) {
                 return InkWell(
                   onTap: () {
-                    autC.getDetailTaskCategory(autC.dataListTask[i]['id']);
-                    Get.to(TaskCategoryPage(autC.dataListTask[i]));
+                    authC.getCheckList(authC.dataCategory[i]['id']);
+                    Get.to(CheckListPage(authC.dataCategory[i]));
                   },
                   child: Container(
                     margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(20),
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: primaryColor),
                         color: whiteColor,
@@ -32,40 +51,12 @@ class ListTaskPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 200,
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(5),
-                          height: 30,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color.fromARGB(255, 252, 244, 178)),
-                          child: Center(
-                              child: Text(
-                            autC.dataListTask[i]['lokasi'],
-                            style: HelperController.textStyle(
-                                12, secondColor, FontWeight.normal),
-                          )),
+                        Text(
+                          authC.dataCategory[i]['name'],
+                          style: HelperController.textStyle(
+                              14, secondColor, FontWeight.bold),
                         ),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: Text(
-                            autC.dataListTask[i]['name'],
-                            style: HelperController.textStyle(
-                                14, secondColor, FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10),
-                          child: Text(
-                            autC.dataListTask[i]['ket'] ?? '-',
-                            style: HelperController.textStyle(
-                                12, secondColor, FontWeight.normal),
-                          ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Divider()),
+                        Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -80,11 +71,11 @@ class ListTaskPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Center(
                                   child: Text(
-                                autC.dataListTask[i]['check1'] +
+                                authC.dataCategory[i]['check1'] +
                                     ' / ' +
-                                    autC.dataListTask[i]['check2'] +
+                                    authC.dataCategory[i]['check2'] +
                                     ' / ' +
-                                    autC.dataListTask[i]['check3'],
+                                    authC.dataCategory[i]['check3'],
                                 style: HelperController.textStyle(
                                     12, Colors.pink, FontWeight.bold),
                               )),
@@ -99,9 +90,9 @@ class ListTaskPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Center(
                                   child: Text(
-                                autC.dataListTask[i]['jumlah'].toString() +
+                                authC.dataCategory[i]['jumlah'].toString() +
                                     ' / ' +
-                                    autC.dataListTask[i]['checklist']
+                                    authC.dataCategory[i]['checklist']
                                         .toString(),
                                 style: HelperController.textStyle(
                                     12, blueMuda, FontWeight.bold),
@@ -113,9 +104,9 @@ class ListTaskPage extends StatelessWidget {
                     ),
                   ),
                 );
-              }),
-        );
-      },
+              });
+        }),
+      ),
     );
   }
 }

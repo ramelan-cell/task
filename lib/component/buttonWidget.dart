@@ -1,3 +1,5 @@
+import 'package:basecode/constan/constan.dart';
+import 'package:basecode/helper/helper.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
@@ -20,8 +22,7 @@ class ButtonWidget extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: TextStyle(
-              fontSize: 16, color: colorTxt, fontWeight: FontWeight.bold),
+          style: HelperController.textStyle(14, whiteColor, FontWeight.bold),
         ),
       ),
     );

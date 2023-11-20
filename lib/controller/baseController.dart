@@ -26,10 +26,10 @@ class BaseController extends GetxController {
 
   void cekVersion(BuildContext context) async {
     final newVersion = NewVersionPlus(
-        iOSId: 'com.example.basecode',
+        iOSId: 'com.exo.task',
         iOSAppStoreCountry: 'id',
-        androidId: "com.example.basecode");
+        androidId: "com.exo.task");
 
-    await advancedStatusCheck(newVersion, context);
+    // await advancedStatusCheck(newVersion, context);
   }
 }

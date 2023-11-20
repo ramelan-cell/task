@@ -20,9 +20,14 @@ class AuthController extends GetxController {
   var userId = ''.obs;
   var nameUser = ''.obs;
   List dataListTask = [];
+  List detailTaskCategory = [];
+  List dataCategory = [];
+  List dataCheckList = [];
 
   late TextEditingController username;
   late TextEditingController password;
+  List<TextEditingController> notes =
+      List.generate(1000, (i) => TextEditingController());
 
   showHide() {
     if (secureText.value == false) {
@@ -38,6 +43,162 @@ class AuthController extends GetxController {
     preferences.commit();
     Get.deleteAll();
     Get.offAndToNamed(HOME_SCREEN);
+  }
+
+  submitTask(String id) async {
+    await EasyLoading.show(
+      status: 'loading...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    try {
+      final response = await http.post(Uri.parse(BaseUrl.tasksubmit),
+          body: {"apikey": BaseUrl.apiKey, "idtask": id});
+      final data = jsonDecode(response.body);
+      await EasyLoading.dismiss();
+      if (data['status'] == 0) {
+        HelperController.messageBoxError(data['message']);
+      } else {
+        HelperController.messageBoxSuccess(data['message']);
+      }
+      update();
+    } on SocketException catch (_) {
+      await EasyLoading.dismiss();
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
+  }
+
+  updateImages(String id, File? tempFile, String idcategory) async {
+    try {
+      var request =
+          http.MultipartRequest('POST', Uri.parse(BaseUrl.updateImage));
+      request.fields.addAll({'apikey': BaseUrl.apiKey, 'idchecklist': id});
+      request.files
+          .add(await http.MultipartFile.fromPath('photo', tempFile!.path));
+
+      var response = await request.send();
+
+      response.stream.transform(utf8.decoder).listen((value) async {
+        print(value);
+      });
+
+      getCheckList(idcategory);
+      update();
+    } on SocketException catch (_) {
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
+  }
+
+  updateNotes(String id, String note, String idcategory) async {
+    try {
+      final response = await http.post(Uri.parse(BaseUrl.updateNotes),
+          body: {"apikey": BaseUrl.apiKey, "idchecklist": id, "note": note});
+      getCheckList(idcategory);
+      update();
+    } on SocketException catch (_) {
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
+  }
+
+  updateCheckList(String id, String checklist1, String checklist2,
+      String checklist3, String idcategory) async {
+    try {
+      final response =
+          await http.post(Uri.parse(BaseUrl.updateCheckList), body: {
+        "apikey": BaseUrl.apiKey,
+        "idchecklist": id,
+        "check1": checklist1,
+        "check2": checklist2,
+        "check3": checklist3,
+        "namauser": box.read('name').toString()
+      });
+      getCheckList(idcategory);
+      update();
+    } on SocketException catch (_) {
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
+  }
+
+  getCheckList(String id) async {
+    await EasyLoading.show(
+      status: 'loading...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    try {
+      final response = await http.post(Uri.parse(BaseUrl.checkList),
+          body: {"apikey": BaseUrl.apiKey, "idcategory": id});
+      final data = jsonDecode(response.body);
+      print(data);
+      await EasyLoading.dismiss();
+      dataCheckList = data['result'];
+      update();
+    } on SocketException catch (_) {
+      await EasyLoading.dismiss();
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
+  }
+
+  getCategory(String id) async {
+    await EasyLoading.show(
+      status: 'loading...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    try {
+      final response = await http.post(Uri.parse(BaseUrl.category),
+          body: {"apikey": BaseUrl.apiKey, "idkategorihead": id});
+      final data = jsonDecode(response.body);
+      print(data);
+      await EasyLoading.dismiss();
+      dataCategory = data['data'];
+
+      update();
+    } on SocketException catch (_) {
+      await EasyLoading.dismiss();
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
+  }
+
+  getDetailTaskCategory(String id) async {
+    print(id);
+    await EasyLoading.show(
+      status: 'loading...',
+      maskType: EasyLoadingMaskType.black,
+    );
+
+    try {
+      final response = await http.post(Uri.parse(BaseUrl.detailTask),
+          body: {"apikey": BaseUrl.apiKey, "idtask": id});
+      final data = jsonDecode(response.body);
+      await EasyLoading.dismiss();
+      detailTaskCategory = data['data'];
+      update();
+    } on SocketException catch (_) {
+      await EasyLoading.dismiss();
+      Get.snackbar('Error', "No Connection Internet , Please Try Again",
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent);
+    }
   }
 
   getListTask(String id) async {

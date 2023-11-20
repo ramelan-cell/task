@@ -1,3 +1,4 @@
+import 'package:basecode/helper/helper.dart';
 import 'package:flutter/material.dart';
 
 import '../constan/constan.dart';
@@ -37,9 +38,12 @@ class TextFormFieldWidget extends StatelessWidget {
               margin: EdgeInsets.all(5),
               child: Text(
                 text,
-                style: TextStyle(fontSize: 14, color: Colors.black87),
+                style: HelperController.textStyle(
+                    13, secondColor, FontWeight.normal),
               )),
           TextFormField(
+            style:
+                HelperController.textStyle(13, secondColor, FontWeight.normal),
             maxLines: maxLine,
             keyboardType: inputType,
             readOnly: readOnly,

@@ -68,9 +68,6 @@ class LauncherPageState extends State<LauncherPage>
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                 ),
-                Center(
-                  child: Text('Task Management'),
-                )
               ],
             ),
           ],

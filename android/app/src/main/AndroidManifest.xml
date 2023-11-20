@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.basecode">
+    package="com.exo.task">
    <application
-        android:label="basecode"
+        android:label="Task Management"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

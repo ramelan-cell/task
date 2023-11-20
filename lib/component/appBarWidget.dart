@@ -1,3 +1,4 @@
+import 'package:basecode/helper/helper.dart';
 import 'package:flutter/material.dart';
 
 import '../constan/constan.dart';
@@ -19,13 +20,12 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: flagBack,
-      iconTheme: IconThemeData(color: Colors.black87),
+      iconTheme: IconThemeData(color: whiteColor),
       elevation: 0,
       backgroundColor: primaryColor,
       title: Text(
         title,
-        style: TextStyle(
-            color: Colors.black87, fontSize: 16, fontWeight: FontWeight.bold),
+        style: HelperController.textStyle(16, whiteColor, FontWeight.bold),
       ),
       centerTitle: true,
       actions: [(flagAction == true) ? child : SizedBox()],

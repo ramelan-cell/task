@@ -1,5 +1,7 @@
 import 'package:basecode/constan/constan.dart';
 import 'package:basecode/controller/authController.dart';
+import 'package:basecode/helper/helper.dart';
+import 'package:basecode/service/api.dart';
 import 'package:basecode/view/taskPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,20 +32,27 @@ class HomePage extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 40,
-                      backgroundImage: NetworkImage(
-                          'http://gab.mapp.co.id/images/profile/noimage.png'),
+                      backgroundImage: (box.read('poto') == null)
+                          ? NetworkImage(
+                              'http://gab.mapp.co.id/images/profile/noimage.png')
+                          : NetworkImage(BaseUrl.urlFoto + box.read('foto')),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 15, left: 10),
+                      margin: EdgeInsets.only(top: 5, left: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Halo, '),
+                          Text(
+                            'Halo, ',
+                            style: HelperController.textStyle(
+                                15, whiteColor, FontWeight.bold),
+                          ),
                           Obx(
                             () => Text(
                               authC.nameUser.value ?? '-',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: HelperController.textStyle(
+                                  15, whiteColor, FontWeight.bold),
                             ),
                           ),
                         ],
