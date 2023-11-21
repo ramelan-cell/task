@@ -1,5 +1,4 @@
 import 'package:basecode/controller/authController.dart';
-import 'package:basecode/view/templatePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

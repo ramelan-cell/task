@@ -86,7 +86,7 @@ class ListTaskPage extends StatelessWidget {
                                     ' / ' +
                                     autC.dataListTask[i]['check3'],
                                 style: HelperController.textStyle(
-                                    12, Colors.pink, FontWeight.bold),
+                                    10, Colors.pink, FontWeight.bold),
                               )),
                             ),
                             Container(
@@ -104,7 +104,7 @@ class ListTaskPage extends StatelessWidget {
                                     autC.dataListTask[i]['checklist']
                                         .toString(),
                                 style: HelperController.textStyle(
-                                    12, blueMuda, FontWeight.bold),
+                                    10, blueMuda, FontWeight.bold),
                               )),
                             )
                           ],

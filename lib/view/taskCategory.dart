@@ -47,7 +47,9 @@ class TaskCategoryPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: primaryColor),
-                        color: whiteColor,
+                        color: (authC.detailTaskCategory[i]['status'] == '1')
+                            ? Colors.greenAccent
+                            : whiteColor,
                         borderRadius: BorderRadius.circular(15)),
                     child: Center(
                         child: Text(

@@ -1,4 +1,4 @@
-import 'package:basecode/controller/baseController.dart';
+import 'package:basecode/view/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/authController.dart';
@@ -14,18 +14,15 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final authC = Get.put(AuthController());
-  final baseC = Get.put(BaseController());
   @override
   void initState() {
-    baseC.cekVersion(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:
-          Obx(() => (authC.flagLogin.value == 0) ? LoginPage() : MenuTabPage()),
+      child: Obx(() => (authC.flagLogin.value == 0) ? LoginPage() : HomePage()),
     );
   }
 }

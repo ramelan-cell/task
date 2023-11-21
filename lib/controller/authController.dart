@@ -189,6 +189,7 @@ class AuthController extends GetxController {
       final response = await http.post(Uri.parse(BaseUrl.detailTask),
           body: {"apikey": BaseUrl.apiKey, "idtask": id});
       final data = jsonDecode(response.body);
+      print(data);
       await EasyLoading.dismiss();
       detailTaskCategory = data['data'];
       update();

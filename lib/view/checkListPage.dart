@@ -133,198 +133,259 @@ class _CheckListPageState extends State<CheckListPage> {
                   ));
             },
           )),
-      body: Container(
-        child: GetBuilder<AuthController>(builder: (authC) {
-          return ListView.builder(
-              shrinkWrap: true,
-              itemCount: authC.dataCheckList.length,
-              itemBuilder: (context, i) {
-                authC.notes[i] =
-                    TextEditingController(text: authC.dataCheckList[i]['note']);
-                return Container(
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(20),
-                  // height: 100,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: primaryColor),
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
-                            child: Text(
-                              authC.dataCheckList[i]['name'],
-                              style: HelperController.textStyle(
-                                  16, secondColor, FontWeight.bold),
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
-                            child: DefaultTextStyle(
-                              style: HelperController.textStyle(
-                                  12, secondColor, FontWeight.normal),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text('Excellent'),
-                                  Text('Good'),
-                                  Text('Poor'),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Divider(),
-                      Row(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Text(
+                      '',
+                      style: HelperController.textStyle(
+                          16, secondColor, FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    child: DefaultTextStyle(
+                      style: HelperController.textStyle(
+                          12, secondColor, FontWeight.normal),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                      onPressed: () => showMyDialogUpload(
-                                          authC.dataCheckList[i]['id']),
-                                      icon: Icon(
-                                        Icons.photo_camera,
-                                        color: Colors.blueAccent,
-                                      )),
-                                  IconButton(
-                                      onPressed: () => showMyDialogConfirm(
-                                          authC.dataCheckList[i]['id'],
-                                          authC.dataCheckList[i]['note']),
-                                      icon: Icon(
-                                        Icons.add_business,
-                                        color: Colors.blueAccent,
-                                      )),
-                                ],
-                              )),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
-                            child: Row(
+                          Text('Excellent'),
+                          Text('Good'),
+                          Text('Poor'),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: GetBuilder<AuthController>(builder: (authC) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: authC.dataCheckList.length,
+                    itemBuilder: (context, i) {
+                      authC.notes[i] = TextEditingController(
+                          text: authC.dataCheckList[i]['note']);
+                      return Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(20),
+                        // height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: primaryColor),
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: [
-                                Checkbox(
-                                  tristate: true,
-                                  value:
-                                      (authC.dataCheckList[i]['check1'] == '1')
-                                          ? true
-                                          : false,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      if (value == true) {
-                                        authC.dataCheckList[i]['check1'] = '1';
-                                        authC.dataCheckList[i]['check2'] = '0';
-                                        authC.dataCheckList[i]['check3'] = '0';
-                                        authC.updateCheckList(
-                                            authC.dataCheckList[i]['id'],
-                                            authC.dataCheckList[i]['check1'],
-                                            authC.dataCheckList[i]['check2'],
-                                            authC.dataCheckList[i]['check3'],
-                                            widget.listData['id']);
-                                      } else {
-                                        authC.dataCheckList[i]['check1'] = '0';
-                                      }
-                                    });
-                                  },
-                                ),
-                                Checkbox(
-                                  tristate: true,
-                                  value:
-                                      (authC.dataCheckList[i]['check2'] == '1')
-                                          ? true
-                                          : false,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      if (value == true) {
-                                        authC.dataCheckList[i]['check2'] = '1';
-                                        authC.dataCheckList[i]['check1'] = '0';
-                                        authC.dataCheckList[i]['check3'] = '0';
-
-                                        authC.updateCheckList(
-                                            authC.dataCheckList[i]['id'],
-                                            authC.dataCheckList[i]['check1'],
-                                            authC.dataCheckList[i]['check2'],
-                                            authC.dataCheckList[i]['check3'],
-                                            widget.listData['id']);
-                                      } else {
-                                        authC.dataCheckList[i]['check2'] = '0';
-                                      }
-                                    });
-                                  },
-                                ),
-                                Checkbox(
-                                  tristate: true,
-                                  value:
-                                      (authC.dataCheckList[i]['check3'] == '1')
-                                          ? true
-                                          : false,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      if (value == true) {
-                                        authC.dataCheckList[i]['check3'] = '1';
-                                        authC.dataCheckList[i]['check1'] = '0';
-                                        authC.dataCheckList[i]['check2'] = '0';
-                                        authC.updateCheckList(
-                                            authC.dataCheckList[i]['id'],
-                                            authC.dataCheckList[i]['check1'],
-                                            authC.dataCheckList[i]['check2'],
-                                            authC.dataCheckList[i]['check3'],
-                                            widget.listData['id']);
-                                      } else {
-                                        authC.dataCheckList[i]['check3'] = '0';
-                                      }
-                                    });
-                                  },
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  child: Text(
+                                    authC.dataCheckList[i]['name'],
+                                    style: HelperController.textStyle(
+                                        16, secondColor, FontWeight.bold),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                      Divider(),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.5,
-                            child: (authC.dataCheckList[i]['picture'] == null)
-                                ? Icon(
-                                    Icons.image,
-                                    size: 100,
-                                    color: Colors.grey,
-                                  )
-                                : Image.network(
-                                    BaseUrl.urlCeklis +
-                                        authC.dataCheckList[i]['picture'],
-                                    width: 150,
-                                    height: 100,
+                            Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.5,
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                            onPressed: () => showMyDialogUpload(
+                                                authC.dataCheckList[i]['id']),
+                                            icon: Icon(
+                                              Icons.photo_camera,
+                                              color: Colors.blueAccent,
+                                            )),
+                                        IconButton(
+                                            onPressed: () =>
+                                                showMyDialogConfirm(
+                                                    authC.dataCheckList[i]
+                                                        ['id'],
+                                                    authC.dataCheckList[i]
+                                                            ['note'] ??
+                                                        ''),
+                                            icon: Icon(
+                                              Icons.add_business,
+                                              color: Colors.blueAccent,
+                                            )),
+                                      ],
+                                    )),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.5,
+                                  child: Row(
+                                    children: [
+                                      Checkbox(
+                                        tristate: true,
+                                        value: (authC.dataCheckList[i]
+                                                    ['check1'] ==
+                                                '1')
+                                            ? true
+                                            : false,
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            if (value == true) {
+                                              authC.dataCheckList[i]['check1'] =
+                                                  '1';
+                                              authC.dataCheckList[i]['check2'] =
+                                                  '0';
+                                              authC.dataCheckList[i]['check3'] =
+                                                  '0';
+                                              authC.updateCheckList(
+                                                  authC.dataCheckList[i]['id'],
+                                                  authC.dataCheckList[i]
+                                                      ['check1'],
+                                                  authC.dataCheckList[i]
+                                                      ['check2'],
+                                                  authC.dataCheckList[i]
+                                                      ['check3'],
+                                                  widget.listData['id']);
+                                            } else {
+                                              authC.dataCheckList[i]['check1'] =
+                                                  '0';
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      Checkbox(
+                                        tristate: true,
+                                        value: (authC.dataCheckList[i]
+                                                    ['check2'] ==
+                                                '1')
+                                            ? true
+                                            : false,
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            if (value == true) {
+                                              authC.dataCheckList[i]['check2'] =
+                                                  '1';
+                                              authC.dataCheckList[i]['check1'] =
+                                                  '0';
+                                              authC.dataCheckList[i]['check3'] =
+                                                  '0';
+
+                                              authC.updateCheckList(
+                                                  authC.dataCheckList[i]['id'],
+                                                  authC.dataCheckList[i]
+                                                      ['check1'],
+                                                  authC.dataCheckList[i]
+                                                      ['check2'],
+                                                  authC.dataCheckList[i]
+                                                      ['check3'],
+                                                  widget.listData['id']);
+                                            } else {
+                                              authC.dataCheckList[i]['check2'] =
+                                                  '0';
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      Checkbox(
+                                        tristate: true,
+                                        value: (authC.dataCheckList[i]
+                                                    ['check3'] ==
+                                                '1')
+                                            ? true
+                                            : false,
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            if (value == true) {
+                                              authC.dataCheckList[i]['check3'] =
+                                                  '1';
+                                              authC.dataCheckList[i]['check1'] =
+                                                  '0';
+                                              authC.dataCheckList[i]['check2'] =
+                                                  '0';
+                                              authC.updateCheckList(
+                                                  authC.dataCheckList[i]['id'],
+                                                  authC.dataCheckList[i]
+                                                      ['check1'],
+                                                  authC.dataCheckList[i]
+                                                      ['check2'],
+                                                  authC.dataCheckList[i]
+                                                      ['check3'],
+                                                  widget.listData['id']);
+                                            } else {
+                                              authC.dataCheckList[i]['check3'] =
+                                                  '0';
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ],
                                   ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 10),
-                            width: MediaQuery.of(context).size.width / 2.5,
-                            child: Text(
-                              authC.notes[i].text,
-                              style: HelperController.textStyle(
-                                  12, secondColor, FontWeight.normal),
+                                ),
+                              ],
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              });
-        }),
+                            Divider(),
+                            (authC.dataCheckList[i]['picture'] == null &&
+                                    authC.dataCheckList[i]['note'] == null)
+                                ? SizedBox()
+                                : Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.5,
+                                        child: (authC.dataCheckList[i]
+                                                    ['picture'] ==
+                                                null)
+                                            ? Icon(
+                                                Icons.image,
+                                                size: 100,
+                                                color: Colors.grey,
+                                              )
+                                            : Image.network(
+                                                BaseUrl.urlCeklis +
+                                                    authC.dataCheckList[i]
+                                                        ['picture'],
+                                                width: 150,
+                                                height: 100,
+                                              ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(top: 10),
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.5,
+                                        child: Text(
+                                          authC.notes[i].text,
+                                          style: HelperController.textStyle(12,
+                                              secondColor, FontWeight.normal),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                          ],
+                        ),
+                      );
+                    });
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }

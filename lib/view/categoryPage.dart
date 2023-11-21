@@ -15,7 +15,7 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-          title: 'Category',
+          title: listData['name'],
           flagBack: true,
           flagAction: true,
           child: GetBuilder<AuthController>(
@@ -24,7 +24,7 @@ class CategoryPage extends StatelessWidget {
                   onPressed: () => authC.getCategory(listData['id']),
                   icon: Icon(
                     Icons.refresh,
-                    color: secondColor,
+                    color: whiteColor,
                   ));
             },
           )),
@@ -45,7 +45,9 @@ class CategoryPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: primaryColor),
-                        color: whiteColor,
+                        color: (authC.dataCategory[i]['status'] == '1')
+                            ? Colors.greenAccent
+                            : whiteColor,
                         borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -77,7 +79,7 @@ class CategoryPage extends StatelessWidget {
                                     ' / ' +
                                     authC.dataCategory[i]['check3'],
                                 style: HelperController.textStyle(
-                                    12, Colors.pink, FontWeight.bold),
+                                    10, Colors.pink, FontWeight.bold),
                               )),
                             ),
                             Container(
@@ -95,7 +97,7 @@ class CategoryPage extends StatelessWidget {
                                     authC.dataCategory[i]['checklist']
                                         .toString(),
                                 style: HelperController.textStyle(
-                                    12, blueMuda, FontWeight.bold),
+                                    10, blueMuda, FontWeight.bold),
                               )),
                             )
                           ],

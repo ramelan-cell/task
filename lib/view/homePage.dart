@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../component/appBarWidget.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -15,13 +17,32 @@ class HomePage extends StatelessWidget {
     final box = GetStorage();
     final authC = Get.put(AuthController());
     return Scaffold(
+      appBar: AppBarWidget(
+          title: titleAplikasi,
+          flagBack: false,
+          flagAction: true,
+          child: Row(
+            children: [
+              IconButton(
+                  onPressed: () => authC.getListTask(authC.userId.value),
+                  icon: Icon(
+                    Icons.refresh,
+                    color: whiteColor,
+                  )),
+              IconButton(
+                  onPressed: () => authC.signOut(),
+                  icon: Icon(
+                    Icons.logout,
+                    color: whiteColor,
+                  )),
+            ],
+          )),
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
                 padding: EdgeInsets.all(20),
-                height: 100,
                 decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.only(

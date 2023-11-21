@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 class HelperController {
   static textStyle(double fontSize, Color color, FontWeight fontWeight) {
-    return GoogleFonts.poppins().copyWith(
+    return GoogleFonts.manrope().copyWith(
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,
